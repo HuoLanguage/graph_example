@@ -1,0 +1,40 @@
+(def init_graph (return [0, 0, [], []]))
+(def insert_node g n
+    (do
+        (let id (index 0 g))
+        (let n (return [id, n]))
+        (set 0 (+ (index 0 g) 1) g)
+        (let g (set 2 (push n (index 2 g)) g))
+        (return g)
+    )
+)
+(def insert_link g l
+    (do
+        (set 1 (+ (index 1 g) 1) g)
+        (let g (set 3 (push l (index 3 g)) g))
+        (return g)
+    )
+)
+(def get_node g id
+    (do
+        (let result 0)
+        (do
+            (each (index 2 g) item i
+                (if (= (index 0 item) id)(let result (index 1 item))(return 0))
+            )
+        )
+        (return result)
+    )
+)
+(def has_link g a b
+    (do
+        (let result 0)
+        (each  (index 3 g) item i
+            (if (= (index 0 item) a)
+                (if (= (index 1 item) b) (let result 1)(return 0))
+                (return 0)
+            )
+        )
+        (return result)
+    )
+)
