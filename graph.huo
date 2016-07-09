@@ -17,10 +17,13 @@
 )
 (def get_node g id
     (do
-        (let result 0)
+        (let result false)
         (do
             (each (index 2 g) item i
-                (if (= (index 0 item) id)(let result (index 1 item))(return 0))
+                (if
+                    (= (index 0 item) id)
+                    (let result (index 1 item))
+                    (return false))
             )
         )
         (return result)
@@ -28,13 +31,13 @@
 )
 (def has_link g a b
     (do
-        (let result 0)
+        (let result false)
         (each  (index 3 g) item i
-            (if (= (index 0 item) a)
-                (if (= (index 1 item) b) (let result 1)(return 0))
-                (return 0)
+            (if (& (= (index 0 item) a) (= (index 1 item) b))
+                (let result true)
+                (return false)
             )
         )
-        (return (= result 1))
+        (return result)
     )
 )
